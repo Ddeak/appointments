@@ -1,6 +1,3 @@
-// @flow
-
-//$FlowFixMe
 import React, { useState } from "react";
 
 // Material
@@ -9,10 +6,11 @@ import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import AddIcon from "@material-ui/icons/Add";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 import { Link } from "react-router-dom";
 
-const styles = theme => ({
+const styles = (theme: Theme) => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
@@ -26,35 +24,33 @@ const styles = theme => ({
   }
 });
 
-type PropType = { classes: Object, history: { goBack: Function } };
+type PropType = { classes: any; history: { goBack: Function } };
+
+const fetchPets = async (body: any) => {
+  const response = await fetch("http://localhost:3001/pets/create", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  });
+  return await response.json();
+};
 
 const CreateCustomer = (props: PropType) => {
   const { classes } = props;
-  const [firstName, setFirstName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
 
   const onCreate = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3001/customers/create", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          firstName,
-          surname,
-          phoneNumber
-        })
-      });
-      const data = await response.json();
+      const data = await fetchPets({ name });
       if (data.method === "Success") props.history.goBack();
       setLoading(false);
     } catch (err) {
-      console.log("Something went wrong creating a customer: ");
+      console.log("Something went wrong creating a pet: ");
       setLoading(false);
     }
   };
@@ -66,31 +62,13 @@ const CreateCustomer = (props: PropType) => {
           id="first-name"
           label="First Name"
           className={classes.textField}
-          value={firstName}
-          onChange={event => setFirstName(event.target.value)}
-          margin="normal"
-        />
-        <TextField
-          id="surname"
-          label="Surname"
-          className={classes.textField}
-          value={surname}
-          onChange={event => setSurname(event.target.value)}
+          value={name}
+          onChange={event => setName(event.target.value)}
           margin="normal"
         />
       </Grid>
       <Grid item xs={12}>
-        <TextField
-          id="phoneNumber"
-          label="Phone Number"
-          className={classes.textField}
-          value={phoneNumber}
-          onChange={event => setPhoneNumber(event.target.value)}
-          margin="normal"
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <Link key={"createButton"} to={`/customers`}>
+        <Link key={"createButton"} to={`/pets`}>
           <Button>Back</Button>
         </Link>
         <Button

@@ -1,5 +1,3 @@
-// @flow
-
 import React from "react";
 
 import classNames from "classnames";
@@ -19,10 +17,10 @@ import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "react-router-dom";
 
 type DrawerType = {
-  open: boolean,
-  handleDrawerClose: () => void,
-  theme: Object,
-  classes: Object
+  open: boolean;
+  handleDrawerClose: () => void;
+  theme: any;
+  classes: any;
 };
 
 const SideDrawer = (props: DrawerType) => {

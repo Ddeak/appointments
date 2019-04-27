@@ -1,5 +1,3 @@
-// @flow
-
 import React from "react";
 
 import classNames from "classnames";
@@ -11,9 +9,9 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
 type MainBarProps = {
-  open: boolean,
-  classes: Object,
-  handleDrawerOpen: () => void
+  open: boolean;
+  classes: any;
+  handleDrawerOpen: () => void;
 };
 
 const MainBar = (props: MainBarProps) => {

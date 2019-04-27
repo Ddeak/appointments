@@ -1,6 +1,3 @@
-// @flow
-
-//$FlowFixMe
 import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
@@ -9,14 +6,19 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 
-const getPets = async setPets => {
+const getPets = async (setPets: (value: any) => void) => {
   const response = await fetch("http://localhost:3001/pets");
   const data = await response.json();
   setPets(data);
 };
 
+type Pet = {
+  _id: string;
+  name: string;
+};
+
 export default () => {
-  const [pets, setPets] = useState([]);
+  const [pets, setPets] = useState<Array<Pet>>([]);
 
   useEffect(() => {
     getPets(setPets);

@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component } from "react";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -7,7 +5,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import green from "@material-ui/core/colors/green";
 
-const SharedSnackbarContext = React.createContext();
+const SharedSnackbarContext = React.createContext({});
 
 export const SnackBarTypes = {
   Success: "success",
@@ -15,7 +13,7 @@ export const SnackBarTypes = {
   Info: "info"
 };
 
-const styles = theme => ({
+const styles = (theme: any) => ({
   [SnackBarTypes.Success]: {
     backgroundColor: green[600]
   },
@@ -33,7 +31,7 @@ type StateType = {
   type: string
 };
 
-class SharedSnackbar extends Component<*, StateType> {
+class SharedSnackbar extends Component<any, StateType> {
   state: StateType = {
     isOpen: false,
     message: "",

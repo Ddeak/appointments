@@ -1,25 +1,23 @@
-// @flow
+import React from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import MainNav from './navigation'
 
-import MainNav from "./navigation";
+import AppointmentsRoutes from './features/appointments'
+import CustomerRoutes from './features/customers'
+import PetRoutes from './features/pets'
+import { SharedSnackbarProvider } from './common/Snackbar'
 
-import AppointmentsRoutes from "./features/appointments";
-import CustomerRoutes from "./features/customers";
-import PetRoutes from "./features/pets";
-import { SharedSnackbarProvider } from "./common/Snackbar";
-
-const Index = () => <h2>Home</h2>;
+const Index = () => <h2>Home</h2>
 
 const routes = () => (
   <React.Fragment>
-    <Route path="/" exact component={Index} />
+    <Route path='/' exact component={Index} />
     <AppointmentsRoutes />
     <CustomerRoutes />
     <PetRoutes />
   </React.Fragment>
-);
+)
 
 const AppRouter = () => (
   <Router>
@@ -31,6 +29,6 @@ const AppRouter = () => (
       </nav>
     </div>
   </Router>
-);
+)
 
-export default AppRouter;
+export default AppRouter

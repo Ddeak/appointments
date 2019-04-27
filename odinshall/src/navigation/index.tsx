@@ -1,14 +1,13 @@
-// @flow
-
-import React, { type Node } from "react";
+import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 
 import MainBar from "./MainBar";
 import Drawer from "./Drawer";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 const drawerWidth = 240;
 
-const styles = theme => ({
+const styles = (theme: Theme) => ({
   root: {
     display: "flex"
   },
@@ -34,7 +33,7 @@ const styles = theme => ({
   hide: {
     display: "none"
   },
-  drawer: {
+  drawerz: {
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: "nowrap"
@@ -71,7 +70,7 @@ const styles = theme => ({
 });
 
 type StateType = { open: boolean };
-type PropsType = { classes: Object, theme: Object, content: Node };
+type PropsType = { classes: any; theme: any; content: any };
 
 class Nav extends React.Component<PropsType, StateType> {
   state: StateType = { open: false };
@@ -105,4 +104,5 @@ class Nav extends React.Component<PropsType, StateType> {
   }
 }
 
+// @ts-ignore
 export default withStyles(styles, { withTheme: true })(Nav);
