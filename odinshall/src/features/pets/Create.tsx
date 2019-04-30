@@ -8,6 +8,8 @@ import Grid from "@material-ui/core/Grid";
 import AddIcon from "@material-ui/icons/Add";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
+import CustomInput from "../../common/Input";
+
 import { Link } from "react-router-dom";
 
 const styles = (theme: Theme) => ({
@@ -58,13 +60,10 @@ const CreatePet = (props: PropType) => {
   return (
     <Grid container direction="row">
       <Grid item xs={12}>
-        <TextField
-          id="first-name"
-          label="First Name"
-          className={classes.textField}
+        <CustomInput
+          label={"First Name"}
           value={name}
           onChange={event => setName(event.target.value)}
-          margin="normal"
         />
       </Grid>
       <Grid item xs={12}>

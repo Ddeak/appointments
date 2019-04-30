@@ -10,7 +10,7 @@ import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import { Link } from "react-router-dom";
 
 import { reducer, Actions, initialReducerState } from "../reducer";
-import CustomerInput from "../../../common/customerInput";
+import CustomInput from "../../../common/Input";
 import { createCustomer } from "./api";
 
 const styles = (theme: Theme) => ({
@@ -45,19 +45,19 @@ const CreateCustomer = (props: PropType) => {
   return (
     <Grid container direction="row">
       <Grid item xs={12}>
-        <CustomerInput
+        <CustomInput
           label={"First Name"}
           value={firstName}
           onChange={event => dispatch(Actions.setFirstName(event.target.value))}
         />
-        <CustomerInput
+        <CustomInput
           label={"Surname"}
           value={surname}
           onChange={event => dispatch(Actions.setSurname(event.target.value))}
         />
       </Grid>
       <Grid item xs={12}>
-        <CustomerInput
+        <CustomInput
           label={"Phone Number"}
           value={phoneNumber}
           onChange={event =>
