@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useReducer, useEffect } from "react";
 
 // Material
 import TextField from "@material-ui/core/TextField";
@@ -8,19 +8,16 @@ import Grid from "@material-ui/core/Grid";
 import AddIcon from "@material-ui/icons/Add";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
+import { reducer, Actions, initialReducerState } from "./reducer";
+
 import { Link } from "react-router-dom";
 
-const getCustomerById = async (
-  id: string,
-  firstName: (value: string) => void,
-  surname: (value: string) => void,
-  phoneNumber: (value: string) => void
-) => {
+const getCustomerById = async (id: string, dispatch) => {
   const response = await fetch(`http://localhost:3001/customers/${id}`);
   const data = await response.json();
-  firstName(data.firstName);
-  surname(data.surname);
-  phoneNumber(data.phoneNumber);
+  dispatch(Actions.setFirstName(data.firstName));
+  dispatch(Actions.setSurname(data.surname));
+  dispatch(Actions.setPhoneNumber(data.phoneNumber));
 };
 
 const styles = (theme: Theme) => ({
@@ -45,15 +42,14 @@ type PropType = {
 
 const CreateCustomer = (props: PropType) => {
   const { classes } = props;
-  const [firstName, setFirstName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialReducerState);
+
+  const { firstName, surname, phoneNumber, loading } = state;
 
   const id = props.match.params.id;
 
   const onEdit = async () => {
-    setLoading(true);
+    dispatch(Actions.setLoading(true));
     try {
       const response = await fetch(
         `http://localhost:3001/customers/edit/${id}`,
@@ -72,15 +68,15 @@ const CreateCustomer = (props: PropType) => {
       );
       const data = await response.json();
       if (data.method === "Success") props.history.goBack();
-      setLoading(false);
+      dispatch(Actions.setLoading(false));
     } catch (err) {
-      console.log("Something went wrong creating a customer: ");
-      setLoading(false);
+      console.log("Something went wrong editing a customer: ");
+      dispatch(Actions.setLoading(false));
     }
   };
 
   useEffect(() => {
-    getCustomerById(id, setFirstName, setSurname, setPhoneNumber);
+    getCustomerById(id, dispatch);
   }, []);
 
   return (
@@ -91,7 +87,7 @@ const CreateCustomer = (props: PropType) => {
           label="First Name"
           className={classes.textField}
           value={firstName}
-          onChange={event => setFirstName(event.target.value)}
+          onChange={event => dispatch(Actions.setFirstName(event.target.value))}
           margin="normal"
         />
         <TextField
@@ -99,7 +95,7 @@ const CreateCustomer = (props: PropType) => {
           label="Surname"
           className={classes.textField}
           value={surname}
-          onChange={event => setSurname(event.target.value)}
+          onChange={event => dispatch(Actions.setSurname(event.target.value))}
           margin="normal"
         />
       </Grid>
@@ -109,7 +105,9 @@ const CreateCustomer = (props: PropType) => {
           label="Phone Number"
           className={classes.textField}
           value={phoneNumber}
-          onChange={event => setPhoneNumber(event.target.value)}
+          onChange={event =>
+            dispatch(Actions.setPhoneNumber(event.target.value))
+          }
           margin="normal"
         />
       </Grid>

@@ -38,7 +38,7 @@ const fetchPets = async (body: any) => {
   return await response.json();
 };
 
-const CreateCustomer = (props: PropType) => {
+const CreatePet = (props: PropType) => {
   const { classes } = props;
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -76,7 +76,7 @@ const CreateCustomer = (props: PropType) => {
           color="primary"
           className={classes.button}
           disabled={loading}
-          onClick={() => onCreate()}
+          onClick={onCreate}
         >
           Create
           <AddIcon className={classes.rightIcon} />
@@ -86,4 +86,4 @@ const CreateCustomer = (props: PropType) => {
   );
 };
 
-export default withStyles(styles)(CreateCustomer);
+export default withStyles(styles)(CreatePet);

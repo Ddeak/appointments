@@ -1,7 +1,6 @@
 import React, { useReducer } from "react";
 
 // Material
-import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
@@ -10,15 +9,11 @@ import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 import { Link } from "react-router-dom";
 
-import { reducer, Actions, initialReducerState } from "./reducer";
+import { reducer, Actions, initialReducerState } from "../reducer";
+import CustomerInput from "../../../common/customerInput";
 import { createCustomer } from "./api";
 
 const styles = (theme: Theme) => ({
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200
-  },
   button: {
     margin: theme.spacing.unit
   },
@@ -50,33 +45,24 @@ const CreateCustomer = (props: PropType) => {
   return (
     <Grid container direction="row">
       <Grid item xs={12}>
-        <TextField
-          id="first-name"
-          label="First Name"
-          className={classes.textField}
+        <CustomerInput
+          label={"First Name"}
           value={firstName}
           onChange={event => dispatch(Actions.setFirstName(event.target.value))}
-          margin="normal"
         />
-        <TextField
-          id="surname"
-          label="Surname"
-          className={classes.textField}
+        <CustomerInput
+          label={"Surname"}
           value={surname}
           onChange={event => dispatch(Actions.setSurname(event.target.value))}
-          margin="normal"
         />
       </Grid>
       <Grid item xs={12}>
-        <TextField
-          id="phoneNumber"
-          label="Phone Number"
-          className={classes.textField}
+        <CustomerInput
+          label={"Phone Number"}
           value={phoneNumber}
           onChange={event =>
             dispatch(Actions.setPhoneNumber(event.target.value))
           }
-          margin="normal"
         />
       </Grid>
       <Grid item xs={12}>
