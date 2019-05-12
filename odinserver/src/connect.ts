@@ -5,7 +5,8 @@ mongoose
     "mongodb://127.0.0.1/OHOG",
     {
       useNewUrlParser: true,
-      useCreateIndex: true
+      useCreateIndex: true,
+      useFindAndModify: false
     }
   )
   .then(() => console.log("Connected to Mongo."))

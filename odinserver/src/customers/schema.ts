@@ -1,6 +1,13 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
+export type CustomerType = {
+  _id?: number;
+  firstName: string;
+  surname: string;
+  phoneNumber: string;
+};
+
 const customerSchema = new Schema({
   firstName: String,
   surname: String,

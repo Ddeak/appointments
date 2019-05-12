@@ -1,6 +1,13 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
+export type PetType = {
+  _id: string;
+  owner: string;
+  name: string;
+  breed: string;
+};
+
 const petSchema = new Schema({
   owner: { type: Schema.Types.ObjectId, ref: "Customer" },
   name: String,

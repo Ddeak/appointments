@@ -1,6 +1,6 @@
-import { Customer } from "./schema";
+import { Customer, CustomerType } from "./schema";
 
-export const editCustomer = async editData => {
+export const editCustomer = async (editData: CustomerType) => {
   const editedCustomer = await Customer.findOneAndUpdate(
     { _id: editData._id },
     editData,
@@ -9,7 +9,7 @@ export const editCustomer = async editData => {
   return { success: true, _id: editedCustomer._id };
 };
 
-export const createCustomer = async customer => {
+export const createCustomer = async (customer: CustomerType) => {
   const savedCustomer = await Customer.create(customer);
   return { success: true, _id: savedCustomer._id };
 };
@@ -18,6 +18,6 @@ export const getCustomers = async () => {
   return await Customer.find({});
 };
 
-export const getCustomerById = async id => {
+export const getCustomerById = async (id: number) => {
   return await Customer.findById(id);
 };

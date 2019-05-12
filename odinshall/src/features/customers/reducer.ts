@@ -22,10 +22,10 @@ type ActionTypes = {
 };
 
 export const ActionTypes: ActionTypes = {
-  UpdateFirstName: "@CreateCustomer/UpdateFirstName",
-  UpdateSurname: "@CreateCustomer/UpdateSurname",
-  UpdatePhoneNumber: "@CreateCustomer/UpdatePhoneNumber",
-  UpdateLoading: "@CreateCustomer/UpdateLoading"
+  UpdateFirstName: "@Customer/UpdateFirstName",
+  UpdateSurname: "@Customer/UpdateSurname",
+  UpdatePhoneNumber: "@Customer/UpdatePhoneNumber",
+  UpdateLoading: "@Customer/UpdateLoading"
 };
 
 export const Actions = {
