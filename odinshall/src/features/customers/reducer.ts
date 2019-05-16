@@ -1,4 +1,4 @@
-type StateType = {
+export type StateType = {
   firstName: string;
   surname: string;
   phoneNumber: string;
@@ -25,7 +25,8 @@ export const ActionTypes: ActionTypes = {
   UpdateFirstName: "@Customer/UpdateFirstName",
   UpdateSurname: "@Customer/UpdateSurname",
   UpdatePhoneNumber: "@Customer/UpdatePhoneNumber",
-  UpdateLoading: "@Customer/UpdateLoading"
+  UpdateLoading: "@Customer/UpdateLoading",
+  SetState: "@Customer/SetState"
 };
 
 export const Actions = {
@@ -44,6 +45,10 @@ export const Actions = {
   setLoading: (loading: boolean) => ({
     type: ActionTypes.UpdateLoading,
     payload: loading
+  }),
+  setState: (state: StateType) => ({
+    type: ActionTypes.SetState,
+    payload: state
   })
 };
 
@@ -57,6 +62,8 @@ export const reducer = (state: StateType, action: ActionType) => {
       return { ...state, phoneNumber: action.payload };
     case ActionTypes.UpdateLoading:
       return { ...state, loading: action.payload };
+    case ActionTypes.SetState:
+      return { ...action.payload };
     default:
       throw new Error();
   }

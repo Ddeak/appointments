@@ -6,17 +6,12 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 
+import { Customer } from "./types";
+
 const getCustomers = async (setCustomers: Function) => {
   const response = await fetch("http://localhost:3001/customers");
   const data = await response.json();
   setCustomers(data);
-};
-
-type Customer = {
-  _id: string;
-  firstName: string;
-  surname: string;
-  phoneNumber: string;
 };
 
 export default () => {
